@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
-
+import { RouterModule, Routes } from '@angular/router';
 
 //Angular Module
 import {FlexLayoutModule } from "@angular/flex-layout";
@@ -17,20 +17,29 @@ import 'hammerjs';
 //ngxBootstrap
 import { CarouselModule } from 'ngx-bootstrap';
 
-
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './shared/layout/header/header.component';
 import { HomePageComponent } from './home-page/home-page.component';
+import { VideoPageComponent } from './video-page/video-page.component';
+
+const appRoutes: Routes = [
+  { path: 'video-page', component: VideoPageComponent},
+  
+];
 
 @NgModule({
   declarations: [
     AppComponent,
     HeaderComponent,
     HomePageComponent,
- 
+    VideoPageComponent,
+   
  
   ],
   imports: [
+    RouterModule.forRoot(
+      appRoutes,
+    ),
     FlexLayoutModule,
     BrowserModule,
     BrowserAnimationsModule,
@@ -41,9 +50,10 @@ import { HomePageComponent } from './home-page/home-page.component';
     MatIconModule,
     CarouselModule.forRoot(),
     
+    
 
   ],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
 export class AppModule { }
