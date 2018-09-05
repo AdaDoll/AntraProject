@@ -1,0 +1,136 @@
+#brand {
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.mat-toolbar {
+    background-color: #303030;
+    position: sticky;
+    position: -webkit-sticky;
+    top: 0;
+    z-index: 1000;
+    font-weight: 100;
+}
+button a {
+    color: white;   
+}
+button a:active {
+
+    text-decoration: none;
+}
+button a:hover {
+
+    text-decoration: none;
+}
+
+
+
+/* Style the search box inside the navigation bar */
+.topnav input[type=text] {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    float: left;
+    border-radius: 15px;
+    border: 1px solid black;
+    margin-right: 16px;
+    font-size: 17px;
+    
+}
+.topnav button {
+    padding-left: 10px;
+    padding-top: 5px;
+    padding-bottom: 5px;
+    background-color: #303030;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid white;
+    font-size: 17px;
+}
+
+/* When the screen is less than 600px wide, stack the links and the search field vertically instead of horizontally */
+@media screen and (max-width: 600px) {
+     input[type=text] {
+        float: none;
+        display: block;
+        text-align: left;
+        width: 100%;
+        margin: 0;
+        padding: 14px;
+    }
+     input[type=text] {
+        border: 1px solid #ccc;
+    }
+}
+
+
+
+
+.example-container {
+    width: auto;
+    height: 700px;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    
+    
+  }
+  
+.example-sidenav-content {
+    display: flex;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+    
+}
+  
+.example-sidenav {
+    padding: 20px;
+}
+.advancedSearch {
+      /* border-radius: 15px;
+      border:1px solid  #303030; */
+      padding: 6px;
+      font-size: 25px;
+
+      font-weight: 100;
+}
+.menuLine {
+    height: 1px;
+    background-color: black;
+    color: black;
+    border: none;
+    margin-bottom: 20px;
+}
+.as_titleBlock {
+    margin-top: 10px;
+}
+.as_title {
+        font-weight: 100;
+        font-size: 20px;
+        padding: 6px;
+        display: inline-block;
+}
+
+.plus {
+    background-color: white;
+    color: #303030;
+    width: 5%;
+}
+
+.as_content {
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-top: 5px;
+    border-radius: 15px;
+    border: 0.5px solid black;
+    height: auto;
+    
+
+}
+.as_content label {
+    
+    font-weight: 100;
+    margin-left: 15px;
+    font-size: 15px;
+    margin-top: 15px;
+}
+

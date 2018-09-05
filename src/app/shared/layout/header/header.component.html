@@ -1,0 +1,48 @@
+<!-- <nav class = "navbar"></nav> -->
+<mat-toolbar color="primary">
+        <div class="example-sidenav-content">
+                <button type="button" mat-button (click)="drawer.toggle()">
+                  <mat-icon>menu</mat-icon>
+                </button>
+        </div>
+    <button type = "button" id = "brand" mat-button><a href = "#">iTube</a></button>
+    <span class="example-spacer">
+        <div class="topnav">
+            <input type="text" placeholder="Search videos...">
+            <button type = "submit">Search</button>
+        </div>
+    </span>
+  </mat-toolbar>
+
+
+  <mat-drawer-container class="example-container" autosize>
+        <app-home-page></app-home-page>
+        <mat-drawer #drawer class="example-sidenav" mode="side">
+          <div class = "advancedSearch">Advanced Search</div>
+          <hr class = "menuLine">
+          <div class = "as_titleBlock">
+            <div class = "as_title">Upload Time</div>
+            <button class = "plus" (click)="showFiller1 = !showFiller1" mat-button >+</button>
+          </div>
+          <div class = "as_content">
+          <ul style="list-style-type:none" *ngIf = "showFiller1">
+                <li><input type ="checkbox"><label for = "checkbox">Within 1 month</label></li>
+                <li><input type ="checkbox"><label for = "checkbox">Within 3 months</label></li>
+                <li><input type ="checkbox"><label for = "checkbox">Within 6 months</label></li>
+          </ul> 
+          </div>
+
+          <div class = "as_titleBlock">
+                <div class = "as_title">Game Genre</div>
+                <button class = "plus" (click)="showFiller2 = !showFiller2" mat-button >+</button>
+          </div>
+                <div class = "as_content">
+                <ul style="list-style-type:none" *ngIf = "showFiller2">
+                      <li><input type ="checkbox"><label for = "checkbox">Darksouls</label></li>
+                      <li><input type ="checkbox"><label for = "checkbox">Overwatch</label></li>
+                      <li><input type ="checkbox"><label for = "checkbox">Dota 2</label></li>
+                </ul> 
+                </div>          
+        </mat-drawer>
+      
+      </mat-drawer-container>
