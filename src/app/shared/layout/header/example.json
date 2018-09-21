@@ -1,0 +1,29 @@
+{"videoExample" : [
+    {
+        "title": "Lord of Cinder",
+        "genre": "DarkSouls",
+        "url" : "https://www.youtube.com/embed/dHwzFkjm1Kk",
+        "uploadTime" : 1
+
+       
+    },
+    {
+        "title": "Windranger",
+        "genre": "Dota2",
+        "url" : "https://www.youtube.com/embed/dHwzFkjm1Kk",
+        "uploadTime" : 2
+    },
+    {
+        "title": "Tracer",
+        "genre": "Overwatch",
+        "url" : "https://www.youtube.com/embed/dHwzFkjm1Kk",
+        "uploadTime" : 6    
+    },
+    {
+        "title": "Elizabeth",
+        "genre": "BioShock",
+        "url" : "https://www.youtube.com/embed/c1lYpEb8gcM",
+        "uploadTime" : 2
+    }
+]
+}

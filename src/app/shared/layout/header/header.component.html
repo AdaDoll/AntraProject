@@ -1,40 +1,189 @@
 <!-- <nav class = "navbar"></nav> -->
-<mat-toolbar color="primary">
+<body>
+<mat-toolbar color="primary" class = "example-topbar">
       <div class="example-sidenav-content">
             <button type="button" mat-button (click)="drawer.toggle()">
                   <mat-icon>menu</mat-icon>
             </button>
       </div>
-      <button type="button" id="brand" mat-button><a href="#">iTube</a></button>
-      <span class="example-spacer">
+      <button type="button" id="brand" (click) = "homePageActive = true"><a style="text-decoration: none;" href="#"><img src = "https://static1.squarespace.com/static/55b523b7e4b08415a07a1687/t/5892366c29687fda177b549c/1532370592644/?format=1500w"></a></button>
+      
+      <div class="example-spacer" (click) = "clickedInside($event)">
             <div class="topnav">
-                  <input id="searchInput" type="text" placeholder="Search videos...">
-                  <button type="submit">Search</button>
+                  <input id = "searchText"type = "text" placeholder = "Search Videos..">
+                  <!-- <input id = "expand" type = "submit"> -->
+                  <input type = "button" id = "expand" value = "{{down? '&uarr;' : '&darr;'}}" (click)="toggleFilter()">
+           
+                  <div class = "dropFilter" id = "dropFilter" >
+                       <div class = "filterContents">
+                             <div >
+                                    <div class = "filterItem" style="width:100%; display:table">
+                                                <div class = "filterItemLabel">
+                                                <label for="MyInput" style="display:table-cell; width:1px">Title : </label>
+                                                </div>
+                                                <div class = "filterItemInput" >
+                                                <input type="text" style="display:table-cell; width:100%; float:right" />
+                                                </div>
+                                    </div>
+                                    <div class = "filterItem" style="width:100%; display:table">
+                                                <div class = "filterItemLabel">
+                                                <label for="MyInput" style="display:table-cell; width:1px">Description : </label>
+                                                </div>
+                                                <div class = "filterItemInput" >
+                                                            <input type="text" style="display:table-cell; width:100%; float:right" />
+                                                </div>
+                                    </div>
+                                    <div class = "filterItem" style="width:100%; display:table">
+                                                <div class = "filterItemLabel">
+                                                <label for="MyInput" style="display:table-cell; width:1px">Tags : </label>
+                                                </div>
+                                                <div class = "filterItemInput" >
+                                                            <input type="text" style="display:table-cell; width:100%; float:right" />
+                                                </div>
+                                    </div>
+                                          
+                                    <div class = "filterItem">
+                                          <div class = "filterItemLabel">
+                                          <label>Size : </label>
+                                          </div>
+                                          <div class = "filterItemInput">
+                                          <div style="float: right;">
+                                                      <input type ="number" > <label>MB</label>
+                                                      
+                                          </div>
+                                          <mat-form-field style = "width: 40%;">
+                                                      <mat-select [(value)]="selected">
+                                                        <mat-option>None</mat-option>
+                                                        <mat-option value="option1">Larger than</mat-option>
+                                                        <mat-option value="option2">Smaller than</mat-option>
+                                                      </mat-select>
+                                          </mat-form-field>
+                                          </div>
+                                          
+                                          
+                                    </div>
+                                          <div class = "filterItem">
+                                                <div class = "filterItemLabel">
+                                                <label for="MyInput" style="display:table-cell; width:1px">From : </label>
+                                                </div>
+                                                <div class = "filterItemInput" >
+                                                            <input type="date" style="display:table-cell; width:100%; float:right" />
+                                                </div>
+                                          </div>
+                                          <div class = "filterItem">
+                                                <div class = "filterItemLabel">
+                                                <label for="MyInput" style="display:table-cell; width:1px">To : </label>
+                                                </div>
+                                                <div class = "filterItemInput" >
+                                                            <input type="date" style="display:table-cell; width:100%; float:right" />
+                                                </div>
+                                          </div>
+                                          <div><button style="float:right;" class = "advancedSearchButton" type="submit" (click) = "advSearch()">Advanced Search</button></div>
+                                    
+                             </div>
+                       </div>
+                  </div>
+                  
+                  <button id = "search" type= "submit">Search</button>
+                  <button id = "searchAlt" type = "submit"><mat-icon>search</mat-icon></button>
             </div>
-      </span>
+            
+      </div>
+      <div class = "right-corner">
+            <button id = "upload" type = "button" mat-button >
+                        <mat-icon>note_add</mat-icon>
+            </button>
+            <button id = "identity" type = "button" mat-button >
+                        <mat-icon>perm_identity</mat-icon>
+            </button>
+      </div>
 
 </mat-toolbar>
 
 
-<mat-drawer-container class="example-container" autosize>
+<mat-drawer-container class="example-container" >
 
-      <!-- this part I wanna do partial refresh -->
+
+      <!-- Partial refresh -->
+      <div *ngIf = "homePageActive">
+            
       <app-home-page></app-home-page>
+      </div>
+      
+      
+      <!-- <input type = "text" [value] = result placeholder="partial refresh"> -->
+      
+      
+      <pre id = "content" *ngIf = "!homePageActive">
+            
+            <!-- <pre>Selected items: <span *ngFor="let filterVideo of resultVideos" style="padding-right:10px;">{{ filterVideo.title}}</span></pre> -->
+            <div *ngFor = "let v of filteredVideos; let i = index">
+                  <span>
+                  <iframe width="360" height="215" [src]='sanitizer.bypassSecurityTrustResourceUrl(v.url)' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+                  <!-- <video width = "320" height = "240" src = {{v.url}}></video> -->
+                  <!-- <iframe width="560" height="315" [src] = 'sanitizer.bypassSecurityTrustUrl(v.url)' frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe> -->     
+                  <p>
+                        {{i + 1}} : 
+                              title: {{v.title}}
+                              UploadTime: {{v.uploadTime}}
+                              Genre: {{v.genre}};
+                  </p>
+                  </span>
+            </div>
+      </pre>
+
+
 
       <!-- Side Bar -->
       <mat-drawer #drawer class="example-sidenav" mode="side">
-            <div class="advancedSearch">Advanced Search</div>
+            <div class="library">Library</div>
+
             <hr class="menuLine">
-            <div class="as_titleBlock">
+            
+            <div class = "libraryContents">
+                  <button type = "button"><mat-icon>favorite_border</mat-icon><label>Favorites</label></button>
+                  <button type = "button"><mat-icon>history</mat-icon><label>Recently Watched</label></button>
+                  <button type = "button"><mat-icon>event_note</mat-icon><label>Watch Later</label></button>
+                  <button type = "button"><mat-icon>fiber_new</mat-icon><label>Newest Uploads</label></button>
+            </div>
+
+            <hr class="menuLine">
+
+            <div class = "libraryContents">
+                        
+                        <button type = "button"><i class="devicon-c-plain"></i><label>C</label><span class = "counts">{{randomNum1}}</span></button>
+                        <button type = "button"><i class="devicon-csharp-plain"></i><label>C#</label><span class = "counts">{{randomNum2}}</span></button>
+                        <button type = "button"><i class="devicon-python-plain"></i><label>Python</label><span class = "counts">{{randomNum1 + randomNum3}}</span></button>
+                        <button type = "button"><i class="devicon-java-plain"></i><label>Java</label><span class = "counts">{{randomNum1 + randomNum2}}</span></button>
+                        <button type = "button"><i class="devicon-dot-net-plain"></i><label>.Net</label><span class = "counts">{{randomNum2 + randomNum3}}</span></button>
+                        <button type = "button"><i class="devicon-angularjs-plain"></i><label>Web Developement</label><span class = "counts">{{randomNum1 + randomNum3}}</span></button>
+
+                  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+            <!-- <div class="as_titleBlock">
                   <div class="as_title">Upload Time</div>
                   <button class="plus" (click)="showFiller1 = !showFiller1" mat-button>+</button>
             </div>
             <div class="as_content">
-                  <ul style="list-style-type:none" *ngIf="showFiller1">
-                        <li><input type="checkbox"><label for="checkbox">Within 1 month</label></li>
-                        <li><input type="checkbox"><label for="checkbox">Within 3 months</label></li>
-                        <li><input type="checkbox"><label for="checkbox">Within 6 months</label></li>
-                  </ul>
+                        <div class="form form-inline" [hidden] = "!showFiller1">
+                                    <div *ngFor="let filterUploadTime of filterUploadTimes; let i = index;" class="form-check" style="padding-right:20px;">
+                                      <label class="form-check-label">
+                                        <input type="checkbox" (change) = "uncheckOthers($event)" id = "{{filterUploadTime}}" [value]="filterUploadTime"> Within {{filterUploadTime}} months
+                                      </label>
+                                    </div>
+                        </div>
+
             </div>
 
             <div class="as_titleBlock">
@@ -42,14 +191,21 @@
                   <button class="plus" (click)="showFiller2 = !showFiller2" mat-button>+</button>
             </div>
             <div class="as_content">
-                  <ul style="list-style-type:none" *ngIf="showFiller2">
-                        <li><input type="checkbox"><label for="checkbox">Darksouls</label></li>
-                        <li><input type="checkbox"><label for="checkbox">Overwatch</label></li>
-                        <li><input type="checkbox"><label for="checkbox">Dota 2</label></li>
-                  </ul>
+                  <div class="form form-inline" [hidden] = "!showFiller2">
+                              <div *ngFor="let filterGenre of filterGenres; let i = index;" class="form-check" style="padding-right:20px;">
+                                <label class="form-check-label">
+                                  <input type="checkbox" id = "{{filterGenre}}" class="form-check-input" [value]="filterGenre"> {{filterGenre}}
+                                </label>
+                              </div>
+                  </div>
+
+
             </div>
-            <div><button class = "advancedSearchButton" type="submit">Advanced Search</button></div>
-            
+            <div><button class = "advancedSearchButton" type="submit" (click) = "advSearch()">Advanced Search</button></div>
+             -->
+
       </mat-drawer>
 
 </mat-drawer-container>
+
+</body>

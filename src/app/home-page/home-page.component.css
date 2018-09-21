@@ -1,10 +1,12 @@
 .mainPage {
-    border-radius: 15px;
-    border: 1px solid grey;
+    /* border-radius: 15px;
+    border: 1px solid grey; */
     position: relative;
     margin-top: 1%;
     margin: 10px;
+    background-color: white;
     padding: 10px;
+    height: 1000px;
 }
 .videoGallery {
     align-content: center;
@@ -20,6 +22,12 @@
     width: 23%;
     height: 70%;
 }
+h3 a {
+    color: #2659ad;
 
+}
 
+h3 {
+    color: #2659ad;
+}
     
